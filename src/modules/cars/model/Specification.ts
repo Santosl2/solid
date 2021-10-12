@@ -14,4 +14,4 @@ class Specification {
 }
 
 
-export { Category };
+export { Specification };
