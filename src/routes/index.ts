@@ -7,6 +7,9 @@ import { specificationRouter } from './specifications.routes';
 
 const router = Router();
 
+router.get("/", (request, response) => {
+    response.send();
+})
 router.use("/categories", categoriesRoutes);
 router.use("/specifications", specificationRouter);
 
