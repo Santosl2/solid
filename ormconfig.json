@@ -4,5 +4,8 @@
     "port": 5432,
     "username": "root",
     "password": "123",
-    "database": "projeto"
+    "database": "projeto",
+    "cli":{
+        "migrationsDir": "./src/database/migrations"
+    }
 }
