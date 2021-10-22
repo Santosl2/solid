@@ -14,14 +14,6 @@ class CategoriesRepository implements ICategoriesRepository {
         this.repository = getRepository(Category);
     }
 
-    // SINGLETON
-    /* public static getInstance(): CategoriesRepository {
-         if (!CategoriesRepository.INSTANCE) {
-             CategoriesRepository.INSTANCE = new CategoriesRepository();
-         }
- 
-         return CategoriesRepository.INSTANCE;
-     }*/
 
     async create({ name, description }: ICreateCategoryDTO): Promise<void> {
 

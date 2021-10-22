@@ -5,10 +5,10 @@ import { ListSpecificationUseCase } from "./ListSpecificationUseCase";
 
 class ListSpecificationController {
 
-    handle(request: Request, response: Response): Response {
+    async handle(request: Request, response: Response): Promise<Response> {
         const listSpecificationsUseCase = container.resolve(ListSpecificationUseCase);
 
-        const listAllSpecifications = listSpecificationsUseCase.execute();
+        const listAllSpecifications = await listSpecificationsUseCase.execute();
 
         return response.json({ listAllSpecifications });
     }

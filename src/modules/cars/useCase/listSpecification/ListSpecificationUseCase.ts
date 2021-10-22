@@ -5,11 +5,12 @@ import { ISpecificationsRepository } from "../../repositories/ISpecificationsRep
 @injectable()
 class ListSpecificationUseCase {
 
-    constructor(@inject("SpecificationsRepository")
-    private specificationRepository: ISpecificationsRepository) { }
+    constructor(
+        @inject("SpecificationsRepository")
+        private specificationRepository: ISpecificationsRepository) { }
 
-    execute(): Specification[] {
-        const allSpecifications = this.specificationRepository.list();
+    async execute(): Promise<Specification[]> {
+        const allSpecifications = await this.specificationRepository.list();
         return allSpecifications;
     }
 }
