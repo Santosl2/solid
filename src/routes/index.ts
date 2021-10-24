@@ -4,7 +4,6 @@ import { categoriesRoutes } from './categories.routes';
 import { specificationRouter } from './specifications.routes';
 import { userRoutes } from "./users.routes";
 
-
 const router = Router();
 
 router.get("/", (request, response) => {
