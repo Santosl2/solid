@@ -17,7 +17,6 @@ class UpdateUserAvatarUseCase {
     }
     async execute({ user_id, avatar_file }: IRequest): Promise<void> {
         const user = await this.usersRepository.findById(user_id);
-
         user.avatar = avatar_file;
 
 

@@ -3,6 +3,7 @@ import { CreateUserController } from "../modules/accounts/useCases/createUser/Cr
 import { UpdateUserAvatarController } from "../modules/accounts/useCases/updateUserAvatar/UpdateUserAvatarController";
 import multer from "multer";
 import uploadConfig from "../config/Upload";
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticate";
 
 const userRoutes = Router();
 const uploadAvatar = multer(uploadConfig.upload("./tmp/avatar"));
@@ -12,6 +13,6 @@ const updateUserAvatarController = new UpdateUserAvatarController();
 
 userRoutes.post("/", createUserController.handle);
 
-userRoutes.patch("/", uploadAvatar.single("file"), updateUserAvatarController.handle);
+userRoutes.patch("/", ensureAuthenticated, uploadAvatar.single("avatar"), updateUserAvatarController.handle);
 
 export { userRoutes };
