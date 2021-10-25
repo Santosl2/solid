@@ -30,6 +30,10 @@ export async function ensureAuthenticated(request: Request, response: Response, 
             throw new AppError("User inválido.", 401);
         }
 
+        request.user = {
+            id
+        }
+
         next();
     }
     catch {
