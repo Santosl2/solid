@@ -18,7 +18,7 @@ export async function ensureAuthenticated(request: Request, response: Response, 
     const [, token] = authHeader.split(" ");
 
     try {
-        // Forçar que ele tera um retorno de IPayload
+        // Forçar que ele ter um retorno de IPayload
         // desestruturação e transforma o sub em id
         const { sub: id } = verify(token, "e73793e0a6cc4cb18f6f6462bcf5fd17") as IPayload;
 
