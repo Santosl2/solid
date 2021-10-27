@@ -1,6 +1,6 @@
-import { Category } from '@modules/cars/entities/Category';
+import { Category } from '@modules/cars/infra/typeorm/entities/Category';
+import { ICategoriesRepository, ICreateCategoryDTO } from '@modules/cars/repositories/ICategoriesRepository';
 import { getRepository, Repository } from 'typeorm';
-import { ICategoriesRepository, ICreateCategoryDTO } from '../ICategoriesRepository';
 
 // DTO => Data transfer object
 
