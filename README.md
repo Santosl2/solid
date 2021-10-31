@@ -19,7 +19,6 @@ D ⇒ DIP - Dependency Inversion Principle (Princípio de Inversão de Dependên
 **RF**
 
 [] Deve ser possível cadastrar um novo carro.
-[] Deve ser possível listar todas as categorias.
 
 **RN**
 
