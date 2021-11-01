@@ -1,0 +1,6 @@
+
+class CreateCarSpecificationController {
+
+}
+
+export { CreateCarSpecificationController };
