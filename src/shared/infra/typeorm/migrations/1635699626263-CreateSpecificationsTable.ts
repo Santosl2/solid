@@ -28,9 +28,9 @@ export class CreateSpecificationsTable1635699626263 implements MigrationInterfac
             "specifications_cars",
             new TableForeignKey({
                 name: "FKSpecificationCar",
-                referencedTableName: "specefications",
+                referencedTableName: "specifications",
                 referencedColumnNames: ["id"],
-                columnNames: ["spefication_id"],
+                columnNames: ["specification_id"],
                 onDelete: "SET NULL",
                 onUpdate: "SET NULL"
             })
@@ -40,7 +40,7 @@ export class CreateSpecificationsTable1635699626263 implements MigrationInterfac
             "specifications_cars",
             new TableForeignKey({
                 name: "FKSpecification",
-                referencedTableName: "CARS",
+                referencedTableName: "cars",
                 referencedColumnNames: ["id"],
                 columnNames: ["car_id"],
                 onDelete: "SET NULL",
