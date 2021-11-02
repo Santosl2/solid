@@ -12,8 +12,6 @@ class UploadCarImageController {
         const images = request.files as IFiles[];
 
         const uploadCarImageUseCase = container.resolve(UploadCarImageUseCase);
-        console.log(images.length);
-
 
         const images_name = images.map(file => file.filename);
 
