@@ -46,9 +46,8 @@ class CreateRentalUseCase {
             throw new AppError("Este usuário já tem um carro alugado.");
         }
 
-        // verificar
         const compare = this.dateProvider.compareInHours(
-            null,
+            undefined,
             expected_return_date
         );
 
