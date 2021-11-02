@@ -7,12 +7,19 @@ dayjs.extend(utc);
 
 
 class DayjsDateProvider implements IDateProvider {
-    convertToUtc(date: Date): string {
+    dateNow(): Date {
+        return dayjs().toDate();
+    }
+
+    convertToUTC(date: Date): string {
         return dayjs(date).utc().local().format();
     }
 
-    compareInHours(start_date: Date, end_date: string): number {
-        return dayjs(end_date).diff(start_date, "hours");
+    compareInHours(start_date: Date, end_date: Date = this.dateNow()): number {
+        const end_date_utc = this.convertToUTC(end_date);
+        const start_date_utc = this.convertToUTC(start_date);
+
+        return dayjs(end_date_utc).diff(start_date_utc, "hours");
     }
 
 
