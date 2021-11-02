@@ -1,3 +1,5 @@
+import { AppError } from "@shared/errors/AppError";
+import dayjs from "dayjs";
 import { RentalsRepositoryInMemory } from "../repositories/in-memory/RentalsRepositoryInMemory";
 import { CreateRentalUseCase } from "./CreateRentalUseCase"
 
@@ -5,6 +7,7 @@ let rentalInMemory: RentalsRepositoryInMemory;
 let createRentalUseCase: CreateRentalUseCase;
 
 describe("Create Rental", () => {
+    const dayAdd24H = dayjs().add(1, "day").toDate();
 
     beforeEach(() => {
         rentalInMemory = new RentalsRepositoryInMemory();
@@ -15,12 +18,45 @@ describe("Create Rental", () => {
         const rental = await createRentalUseCase.execute({
             user_id: "123",
             car_id: "00077",
-            expected_return_date: new Date()
+            expected_return_date: dayAdd24H
         });
 
 
         expect(rental).toHaveProperty("id");
         expect(rental).toHaveProperty("start_date");
     });
+
+    it("should not be able to create a new rental if there is another open to the same user", () => {
+        expect(async () => {
+            await createRentalUseCase.execute({
+                user_id: "123",
+                car_id: "00077",
+                expected_return_date: dayAdd24H
+            });
+
+            const rental = await createRentalUseCase.execute({
+                user_id: "123",
+                car_id: "00077",
+                expected_return_date: dayAdd24H
+            });
+        }).rejects.toBeInstanceOf(AppError);
+
+    });
+
+    it("should not be able o create a new rental if there is another open to the same user", () => {
+        expect(async () => {
+            await createRentalUseCase.execute({
+                user_id: "123",
+                car_id: "Tesla",
+                expected_return_date: dayAdd24H
+            });
+
+            const rental = await createRentalUseCase.execute({
+                user_id: "321",
+                car_id: "Tesla",
+                expected_return_date: dayAdd24H
+            });
+        }).rejects.toBeInstanceOf(AppError);
+    })
 
 })
