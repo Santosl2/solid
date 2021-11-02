@@ -43,7 +43,7 @@ describe("Create Rental", () => {
 
     });
 
-    it("should not be able o create a new rental if there is another open to the same user", () => {
+    it("should not be able o create a new rental if there is another open to the same car", () => {
         expect(async () => {
             await createRentalUseCase.execute({
                 user_id: "123",
@@ -55,6 +55,16 @@ describe("Create Rental", () => {
                 user_id: "321",
                 car_id: "Tesla",
                 expected_return_date: dayAdd24H
+            });
+        }).rejects.toBeInstanceOf(AppError);
+    });
+
+    it("should not be able o create a new rental with invalid date", () => {
+        expect(async () => {
+            await createRentalUseCase.execute({
+                user_id: "123",
+                car_id: "Tesla",
+                expected_return_date: dayjs().toDate()
             });
         }).rejects.toBeInstanceOf(AppError);
     })
