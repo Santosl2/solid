@@ -12,8 +12,13 @@ getConnectionOptions().then(options => {
 
     newOptions.database = process.env.NODE_ENV === "test"
         ? "supertest_db" : newOptions.database;
-    newOptions.host = 'database';
+
+    newOptions.host = process.env.NODE_ENV === "test"
+        ? 'localhost' : 'database';
+
     createConnection({
         ...options,
     });
 });
+
+
