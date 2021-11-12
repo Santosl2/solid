@@ -13,7 +13,7 @@ interface IRequest {
 class DevolutionRentalUseCase {
 
     constructor(
-        @inject("RentalsRepository")
+        @inject("RentalRepository")
         private rentalsRepository: IRentalsRepository,
 
         @inject("CarsRepository")
@@ -26,7 +26,7 @@ class DevolutionRentalUseCase {
 
     async execute({ id, user_id }: IRequest) {
         const rental = await this.rentalsRepository.findById(id);
-        const car = await this.carsRepository.findById(id);
+        const car = await this.carsRepository.findById(rental.car_id);
 
         const minHours = 24;
         const minDaily = 1;
@@ -65,7 +65,7 @@ class DevolutionRentalUseCase {
         this.rentalsRepository.create(rental);
         this.carsRepository.updateAvailable(car.id, true);
 
-
+        return rental;
     }
 
 }
