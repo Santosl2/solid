@@ -2,6 +2,8 @@ import { verify } from "jsonwebtoken";
 import { NextFunction, Request, Response } from "express";
 import { AppError } from "@shared/errors/AppError";
 import { UsersRepository } from "@modules/accounts/infra/typeorm/respositories/UsersRepository";
+import { UsersTokensRepository } from "@modules/accounts/infra/typeorm/respositories/UsersTokensRepository";
+import Auth from "@config/Auth";
 
 
 interface IPayload {
@@ -10,6 +12,8 @@ interface IPayload {
 
 export async function ensureAuthenticated(request: Request, response: Response, next: NextFunction) {
     const authHeader = request.headers.authorization;
+
+    const usersTokenRepository = new UsersTokensRepository();
 
     if (!authHeader) {
         throw new AppError("Token inválido.", 401);
@@ -20,11 +24,12 @@ export async function ensureAuthenticated(request: Request, response: Response, 
     try {
         // Forçar que ele ter um retorno de IPayload
         // desestruturação e transforma o sub em id
-        const { sub: id } = verify(token, "e73793e0a6cc4cb18f6f6462bcf5fd17") as IPayload;
+        const { sub: id } = verify(token, Auth.secret_refresh_token) as IPayload;
 
 
-        const usersRepository = new UsersRepository();
-        const userExists = await usersRepository.findById(id);
+        //const usersRepository = new UsersRepository();
+        const userExists = await usersTokenRepository
+            .findByUserIdAndRefreshToken(id, token);
 
         if (!userExists) {
             throw new AppError("User inválido.", 401);
