@@ -14,6 +14,7 @@ import { RentalsRepository } from "@modules/rentals/infra/typeorm/repositories/R
 
 
 import "@shared/container/providers";
+import "@shared/container/providers/MailProvider";
 import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
 import { UsersTokensRepository } from "@modules/accounts/infra/typeorm/respositories/UsersTokensRepository";
 
