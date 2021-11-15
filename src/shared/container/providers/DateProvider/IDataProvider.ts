@@ -4,6 +4,7 @@ interface IDateProvider {
     convertToUTC(date: Date): string;
     dateNow(): Date;
     add(quantity: number, type?: string): Date;
+    compareIfBefore(start: Date, end: Date): boolean;
 }
 
 export { IDateProvider };

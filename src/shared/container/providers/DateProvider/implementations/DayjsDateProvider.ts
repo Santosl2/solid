@@ -7,7 +7,9 @@ dayjs.extend(utc);
 
 
 class DayjsDateProvider implements IDateProvider {
-
+    compareIfBefore(start: Date, end: Date): boolean {
+        return dayjs(start).isBefore(end);
+    }
 
     dateNow(): Date {
         return dayjs().toDate();
